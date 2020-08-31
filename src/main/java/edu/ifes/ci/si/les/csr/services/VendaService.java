@@ -100,7 +100,7 @@ public class VendaService {
     //Regra de Negócio: Comissão de 1% com base no valor do veiculo vendido 
     public void comissaoVenda(Venda obj) {
         if (obj != null) {
-            Funcionario func = obj.getFuncionario();
+            Funcionario func = funcService.findById(obj.getFuncionario().getId());
             double comissao = obj.getValorFinal() * 0.01;
             func.setSalario(func.getSalario() + comissao);
             funcService.update(func);
@@ -111,7 +111,7 @@ public class VendaService {
 
     public void removerComissao(Venda obj) {
         if (obj != null) {
-            Funcionario func = obj.getFuncionario();
+            Funcionario func = funcService.findById(obj.getFuncionario().getId());
             double comissao = obj.getValorFinal() * 0.01;
             func.setSalario(func.getSalario() - comissao);
             funcService.update(func);
